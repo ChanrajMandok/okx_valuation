@@ -1,0 +1,52 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Make Migrations",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "makemigrations"
+            ],
+            "django": true
+        },
+        {
+            "name": "Python: Migrate",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "migrate"
+            ],
+            "django": true
+        },
+        {
+            "name": "Populate tables",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "runscript",
+                "-v3",
+                "script_populate_tables"
+            ],
+            "django": true
+        },
+        {
+            "name": "Run Volatilty Plot",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "runscript",
+                "-v3",
+                "script_run_service_main"
+            ],
+            "django": true
+        }
+    ]
+}
