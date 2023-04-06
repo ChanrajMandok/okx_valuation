@@ -1,4 +1,5 @@
 import math
+import json
 
 from typing import Dict
 
@@ -63,7 +64,14 @@ class ServiceMaturitiesRetrieveHistoricalVols:
                                                                 return_holding_period=math.ceil(window/60),
                                                                 instrument_term=1
                                                                 )
-                
-        return maturities_dict
-                
+
+              
+        for term, data in sorted_maturities_dict.items():
+            data.pop('Okx', None)
+            for k, v in data.items():
+                if isinstance(v, list):
+                    data.pop(k, None)
+        
+        return sorted_maturities_dict
+                        
                  

@@ -1,3 +1,5 @@
+import math
+import json
 from okx_app.decorators.decorator_option_market_retriever_interface_imports import decorator_option_market_retriever_interface_imports
 from okx_app.decorators.decorator_plot_volatilty_interface_imports import decorator_plot_volatilty_interface_imports
 
@@ -21,8 +23,7 @@ class ServiceMain():
 
     @decorator_plot_volatilty_interface_imports
     @decorator_option_market_retriever_interface_imports
-    def get_markets(self, 
-                    historicals: bool = False,
+    def get_markets(self,
                     service_option_markets_okx_retriever = None,
                     service_plot_volatilty_surface_area = None,
                     service_plot_volatilty_smile = None,
@@ -39,10 +40,9 @@ class ServiceMain():
 
         # Add bsm_iv to ModelOptionMarket objects for use later
         logger.info('Calculating BSM Derived Implied Volatilty')
-
         for exchange, markets in option_markets.items():
             for market in markets:
-                implied_vol = self.__service_option_market_implied_vol_bsm_estimator.calculate_implied_volatility(market=market, reference=market.reference)
+                self.__service_option_market_implied_vol_bsm_estimator.calculate_implied_volatility(market=market, reference=market.reference)
 
         # Get list of maturities and corresponding options (key=maturity: value=list of options)
         maturities_dict = self.service_maturities_dict_from_option_markets_list.get_maturities(option_markets=option_markets)
@@ -58,11 +58,17 @@ class ServiceMain():
             logger.info(f"If Paused, close plot to continue")
             cls().plot(option_markets=maturities_dict)
 
-        if historicals == True:
-            final_dict = self.service_maturities_retrieve_historical_vols.get_vols(maturities_dict=maturities_dict)
-            return final_dict
-        else:
-            pass
+        logger.info(f"Retrieving Short term Historical Vol Estimators")
+        historicals_dict = {k: v for k, v in sorted(maturities_dict.items(), reverse=True) if k < float(3/365)}
+        final_dict = self.service_maturities_retrieve_historical_vols.get_vols(maturities_dict=historicals_dict)
+        
+        for k, v in final_dict.items():
+            print(json.dumps(f"{math.ceil(k*365)} DTE Historical Volatilty Data : {v}"))
+            
+
+
+
+        
 
 
 

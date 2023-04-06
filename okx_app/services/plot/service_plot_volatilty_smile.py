@@ -1,3 +1,4 @@
+import math
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
@@ -67,9 +68,8 @@ class ServicePlotVolatilitySmile(ServicePlotVolatilityInterface):
             plt.title(f" Okx{dte} DTE Volatility Smile")
             ax.legend()
             ax.grid(True, which='both', linewidth=0.1)
-            ax.xaxis.set_minor_locator(MultipleLocator(int(dte)))
-            ax.yaxis.set_minor_locator(MultipleLocator(int(dte)))
+            ax.xaxis.set_minor_locator(MultipleLocator(math.ceil(dte) if math.ceil(dte) else 1 ))
+            ax.yaxis.set_minor_locator(MultipleLocator(math.ceil(dte) if math.ceil(dte) >=1  else 1))
             plt.show(block=True)
-            plt.show()
 
 

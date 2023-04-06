@@ -74,4 +74,4 @@ class ServicePlotVolatilitySurfaceArea(ServicePlotVolatilityInterface):
         plt.title(f"Okx Volatility Surface Area")
         plt.rcParams.update({'font.size': 12}) # Increase font size
         ax.view_init(elev=30, azim=120) # Adjust lighting
-        plt.show(block=True)
+        plt.show(block=False)
