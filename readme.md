@@ -9,7 +9,7 @@
 |Install relevant libraries | pip install -r requirements.txt|
 |Create a .env file and add it to the root | .env
 |Create DB on local machine | PGadmin -> servers -> postgres -> databases -> create -> okx|
-|User must have personal Binance secret Key & password| https://accounts.binance.com/en/register|
+|User needs Binance creds to run historical Vol| https://accounts.binance.com/en/register|
 |Create json lauch file| Open and Paste contents of launch_items.txt (ensure commas are correct)|
 |register models in  okx_app\models.py | models in list_of models.txt|
 |Run Make Migrations|Run & debug -> drowdown Menu -> Make Migrations |
