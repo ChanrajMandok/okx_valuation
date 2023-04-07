@@ -42,6 +42,8 @@ This repository retrieves all ETH–USD Options from OKX with a maturity of less
 
 The options are then divided into different maturities, and for each maturity, the implied volatility is plotted to produce the volatility surface area. The volatility surface area gives a visual representation of the implied volatility across different strikes and maturities. The volatility surface area helps traders to understand the market's perception of future volatility and identify potiential asymmetries in option pricing. Additionally, the volatility smile is plotted for each maturity. The volatility smile shows the relationship between implied volatility and strike price for a single maturity. The term "smile" arises from the shape of the curve, which resembles a smile. The volatility smile was first observed after the 1987 stock market crash and has become a foundation in the field of quantitative finance. The smile demonstrates that the implied volatility is not constant but varies with the strike price of the option.
 
+Finally, if the code is provided with Binance keys, it will calculate the historical volatility measures from the historical volatility file in services (<3 DTE options only). This includes empirically verified methods such as Rodgers-Sachall, Yhang Zhang, Subsampled volatility, Volatility of Volatility, Garch(1,1) volatility Forecast and finally a Kalman Filter applied upon the volatility dataset. These measures can provide additional infomation when pricing Options. 
+
 
 
 
