@@ -1,3 +1,4 @@
+import os
 import math
 import json
 from okx_app.decorators.decorator_option_market_retriever_interface_imports import decorator_option_market_retriever_interface_imports
@@ -58,12 +59,13 @@ class ServiceMain():
             logger.info(f"If Paused, close plot to continue")
             cls().plot(option_markets=maturities_dict)
 
-        logger.info(f"Retrieving Short term Historical Vol Estimators")
-        historicals_dict = {k: v for k, v in sorted(maturities_dict.items(), reverse=True) if k < float(3/365)}
-        final_dict = self.service_maturities_retrieve_historical_vols.get_vols(maturities_dict=historicals_dict)
-        
-        for k, v in final_dict.items():
-            print(json.dumps(f"{math.ceil(k*365)} DTE Historical Volatilty Data : {v}"))
+        if not os.environ['BINANCE_API_KEY'] == '' :
+            logger.info(f"Retrieving Short term Historical Vol Estimators")
+            historicals_dict = {k: v for k, v in sorted(maturities_dict.items(), reverse=True) if k < float(3/365)}
+            final_dict = self.service_maturities_retrieve_historical_vols.get_vols(maturities_dict=historicals_dict)
+            
+            for k, v in final_dict.items():
+                print(json.dumps(f"{math.ceil(k*365)} DTE Historical Volatilty Data : {v}"))
             
 
 
