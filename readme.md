@@ -46,6 +46,8 @@ These volatility smiles are plotted to display the IV smile/curve which would be
 
 Finally, if the code is provided with Binance keys, it will calculate the historical volatility measures from the historical volatility file in services (<3 DTE options only). This includes empirically verified methods such as Rodgers-Sachall, Yhang Zhang, Subsampled volatility, Volatility of Volatility, Garch(1,1) volatility Forecast and finally a Kalman Filter applied upon the volatility dataset. These measures can provide additional infomation when pricing Options. 
 
+## Option Valuation Model
+Implied volatility estimations are done using the Newton-Raphson method to approximate the Implied Volatility in the Black-Scholes-Merton model. The Newton-Raphson method offers an efficient approach to approximate the implied volatility, via iteratively refining an initial guess for the implied volatility until the calculated option price converges to the market price within a desired precision. The Newton-Raphson method is ideal for this application due to its rapid convergence when compared to alternative models such as brute-force searching or bisection methods may require a larger number of calculations, resulting in higher latency.
 
 
 
